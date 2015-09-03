@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS `functiondefinition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `functiondefinition` (
-  `id` varchar(45) NOT NULL,
+  `id` varchar(100) NOT NULL,
   `xmlns` longtext,
   `annotation` longtext,
   `model_id` varchar(100) NOT NULL,
@@ -137,7 +137,7 @@ CREATE TABLE `kineticlaw` (
   `kid` varchar(45) NOT NULL,
   `math` longtext,
   `annotation` longtext NOT NULL,
-  `reaction_id` varchar(45) NOT NULL,
+  `reaction_id` varchar(100) NOT NULL,
   PRIMARY KEY (`kid`,`reaction_id`),
   KEY `fk_kineticlaw_reaction1_idx` (`reaction_id`),
   CONSTRAINT `fk_kineticlaw_reaction1` FOREIGN KEY (`reaction_id`) REFERENCES `reaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -237,7 +237,7 @@ CREATE TABLE `modifierspeciesreference` (
   `sboTerm` varchar(45) DEFAULT NULL,
   `speciestype` varchar(45) DEFAULT NULL,
   `annotation` longtext,
-  `reaction_id` varchar(45) NOT NULL,
+  `reaction_id` varchar(100) NOT NULL,
   PRIMARY KEY (`species`,`reaction_id`),
   KEY `fk_modifierspeciesreference_reaction1_idx` (`reaction_id`),
   CONSTRAINT `fk_modifierspeciesreference_reaction1` FOREIGN KEY (`reaction_id`) REFERENCES `reaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -290,7 +290,7 @@ DROP TABLE IF EXISTS `reaction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reaction` (
-  `id` varchar(45) NOT NULL,
+  `id` varchar(100) NOT NULL,
   `name` varchar(250) DEFAULT NULL,
   `reversible` tinyint(1) DEFAULT NULL,
   `fast` tinyint(1) DEFAULT NULL,
@@ -312,7 +312,7 @@ DROP TABLE IF EXISTS `rules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rules` (
-  `id` varchar(45) NOT NULL,
+  `id` varchar(100) NOT NULL,
   `math` longtext,
   `ruletype` varchar(45) DEFAULT NULL,
   `variable` varchar(45) DEFAULT NULL,
@@ -408,7 +408,7 @@ CREATE TABLE `simplespeciesreference` (
   `speciestype` varchar(45) NOT NULL,
   `constant` tinyint(1) DEFAULT NULL,
   `annotation` longtext,
-  `reaction_id` varchar(45) NOT NULL,
+  `reaction_id` varchar(100) NOT NULL,
   PRIMARY KEY (`species`,`speciestype`,`reaction_id`),
   KEY `fk_simplespeciesreference_reaction1_idx` (`reaction_id`),
   CONSTRAINT `fk_simplespeciesreference_reaction1` FOREIGN KEY (`reaction_id`) REFERENCES `reaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -451,7 +451,7 @@ DROP TABLE IF EXISTS `speciestype`;
 CREATE TABLE `speciestype` (
   `id` int(11) NOT NULL,
   `type` varchar(45) DEFAULT NULL,
-  `reaction_id` varchar(45) NOT NULL,
+  `reaction_id` varchar(100) NOT NULL,
   PRIMARY KEY (`id`,`reaction_id`),
   KEY `fk_speciestype_reaction1_idx` (`reaction_id`),
   CONSTRAINT `fk_speciestype_reaction1` FOREIGN KEY (`reaction_id`) REFERENCES `reaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
